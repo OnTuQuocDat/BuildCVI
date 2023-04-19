@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sonion Laser</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Scan_button">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -27,7 +27,7 @@
      <string>Scan</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="Start_button">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -40,7 +40,7 @@
      <string>START</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="Stop_button">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -53,7 +53,7 @@
      <string>STOP</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="Manual_button">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -66,7 +66,7 @@
      <string>MANUAL</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="Settings_button">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -79,7 +79,7 @@
      <string>SETTINGS</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="Unique_code_button">
     <property name="geometry">
      <rect>
       <x>450</x>
@@ -170,7 +170,7 @@
      <string>UNQUE CODE</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="Text_Area">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -183,7 +183,7 @@
      <number>1</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="Quit_button">
     <property name="geometry">
      <rect>
       <x>890</x>
