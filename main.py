@@ -13,21 +13,27 @@ from Page1 import Ui_MainWindow
 from UniqueUI import Ui_SelectUniqueCode
 from Printer import Ui_Printer
 from SettingUI import Ui_SettingWindow
+from Password import Ui_PasswordWindow
 from laserconfig import *
 from popup_window import *
 from tcp import *
 from print_serial import *
 from Gamma import *
 
-class Printer(QMainWindow):
+class Password(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.win3 = QMainWindow()
-        self.page_printer = Ui_Printer()
-        self.page_printer.setupUi(self.win3)
-        self.win3.setFixedHeight(681)
-        self.win3.setFixedWidth(818)
-        self.win3.show()
+        self.win5 = QMainWindow()
+        self.page_password = Ui_PasswordWindow()
+        self.page_password.setupUi(self.win5)
+        self.win5.setFixedHeight(99)
+        self.win5.setFixedSize(396)
+        self.win5.show()
+
+        self.page_password.checkpass_button.clicked.connect(self.check_pass)
+
+    def check_pass(self):
+        pass
 
 class SettingUI(QMainWindow):
     def __init__(self):
@@ -38,6 +44,16 @@ class SettingUI(QMainWindow):
         self.win4.setFixedHeight(486)
         self.win4.setFixedWidth(647)
         self.win4.show()
+
+class Printer(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.win3 = QMainWindow()
+        self.page_printer = Ui_Printer()
+        self.page_printer.setupUi(self.win3)
+        self.win3.setFixedHeight(681)
+        self.win3.setFixedWidth(818)
+        self.win3.show()
 
 class UniqueUI(QMainWindow):
     def __init__(self):
