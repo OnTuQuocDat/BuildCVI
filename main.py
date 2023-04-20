@@ -33,7 +33,11 @@ class Password(QMainWindow):
         self.page_password.checkpass_button.clicked.connect(self.check_pass)
 
     def check_pass(self):
-        pass
+        if self.page_password.password_blank.setText() == 'IDEE':
+            result_password = True
+        else:
+            result_password = False
+
 
 class SettingUI(QMainWindow):
     def __init__(self):
