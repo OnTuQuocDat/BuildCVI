@@ -1,4 +1,5 @@
 from laserconfig import *
+import os
 
 def output_serial(product,serial_gamma):
     if product == 11: #Gamma
@@ -93,6 +94,15 @@ def output_serial(product,serial_gamma):
     return serial_gamma
 
 
-def write_sn_gamma(serial_gamma):
+def write_sn_gamma(serial_gamma,serialforGammapath):
     #Write final serial gamma into txt file for next running
-    print(Laser_Param.serialforGammapath)
+    # print(Laser_Param.serialforGammapath)
+    fp = open(serialforGammapath)
+    if fp is not None:
+        #fp.write()
+        fp.close()
+    else:
+        pop_up_content("Error writing serial number file")
+        
+
+

@@ -10,10 +10,49 @@
 from PyQt5.QtWidgets import QApplication,QMainWindow
 import sys
 from Page1 import Ui_MainWindow
+from UniqueUI import Ui_SelectUniqueCode
+from Printer import Ui_Printer
+from SettingUI import Ui_SettingWindow
 from laserconfig import *
 from popup_window import *
 from tcp import *
-from print_serial import output_serial
+from print_serial import *
+from Gamma import *
+
+class Printer(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.win3 = QMainWindow()
+        self.page_printer = Ui_Printer()
+        self.page_printer.setupUi(self.win3)
+        self.win3.setFixedHeight(681)
+        self.win3.setFixedWidth(818)
+        self.win3.show()
+
+class SettingUI(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.win4 = QMainWindow()
+        self.page_setting = Ui_SettingWindow()
+        self.page_setting.setupUi(self.win4)
+        self.win4.setFixedHeight(486)
+        self.win4.setFixedWidth(647)
+        self.win4.show()
+
+class UniqueUI(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.win2 = QMainWindow()
+        self.page_unique = Ui_SelectUniqueCode()
+        self.page_unique.setupUi(self.win2)
+        self.win2.show()
+
+        self.page_unique.SU60left_button.clicked.connect(SU60_left)
+        self.page_unique.SU60right_button.clicked.connect(SU60_right)
+        self.page_unique.SU85left_button.clicked.connect(SU85_L)
+        self.page_unique.SU85right_button.clicked.connect(SU85_R)
+        self.page_unique.SU100left_button.clicked.connect(SU100_L)
+        self.page_unique.SU100right_button.clicked.connect(SU100_R)
 
 class Page1(QMainWindow):
     def __init__(self):
@@ -41,7 +80,7 @@ class Page1(QMainWindow):
         #Generate serial gamma
         last_serial = output_serial(self.product_gamma)
         #Write final serial gamma into file txt
-        
+        write_sn_gamma(last_serial,laserconfig.serialforGammapath)
 
                     
             
