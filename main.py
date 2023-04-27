@@ -29,14 +29,15 @@ class Password(QMainWindow):
         self.win5.setFixedHeight(99)
         self.win5.setFixedSize(396)
         self.win5.show()
+        self.result_password = False
 
         self.page_password.checkpass_button.clicked.connect(self.check_pass)
 
     def check_pass(self):
         if self.page_password.password_blank.setText() == 'IDEE':
-            result_password = True
+            self.result_password = True
         else:
-            result_password = False
+            self.result_password = False
 
 
 class SettingUI(QMainWindow):
@@ -84,6 +85,11 @@ class Page1(QMainWindow):
         self.win1.setFixedWidth(990)
         self.win1.show()
 
+        #Set disable enable
+        self.page1.Start_button.setEnabled(False)
+        self.page1.Stop_button.setEnabled(False)
+        self.page1.Scan_button.setEnabled(False)
+
         self.page1.Scan_button.clicked.connect(self.scan_function)
         self.page1.Start_button.clicked.connect(self.start_function)
         self.page1.Stop_button.clicked.connect(self.stop_function)
@@ -97,15 +103,14 @@ class Page1(QMainWindow):
     def scan_function(self):
         pass
     def start_function(self):
+        self.page1.Stop_button.setEnabled(True)
         #Generate serial gamma
-        last_serial = output_serial(self.product_gamma)
+        last_serial = output_serial(self.product_gamma,self.serial_gamma)
         #Write final serial gamma into file txt
         write_sn_gamma(last_serial,laserconfig.serialforGammapath)
-
+        #Send AS --> Start marking
+        send_AS()
                     
-            
-
-
 
 
     def stop_function(self):
@@ -115,7 +120,8 @@ class Page1(QMainWindow):
     def settings_function(self):
         pass
     def unique_code_button_function(self):
-        pass
+        self.page1.Start_button.setEnabled(True)
+        
     def quit_function(self):
         self.win1.close()
 
@@ -134,9 +140,8 @@ if __name__ == '__main__':
             # pop_up_content("Connection to server failed")
         # else:
             #Run User Interface
-        TCP_init()
+        # TCP_init()
         #RUN USER INTERFACE
-
 
 
         sys.exit(app.exec())
