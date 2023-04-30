@@ -130,7 +130,11 @@ Sub LaserMarker_ScriptBegin ()
 		Next
 lasermarker.scriptutils.message "Ban dang khac tong cong " & i * j & " con hang. Qua trinh khac ma da hoan tat"
 
+Dim p As New Process()
+p.StartInfo.FIleName = "C:\\Sonion\\main.exe"
+p.Start()
 End Sub
+
 Function SN() 
 			a6 = a6 + 1
 			'a6 customize
@@ -281,7 +285,7 @@ Function decode(txt)
 End Function
 Sub WriteToFile (StrText, StrFileName)
   Dim objFileHandle
-  Dim p As New Process()
+  'Dim p As New Process()
 	'if the file exist open it in append mode, otherwise create a new file
 	If (objFso.FileExists(strFileName)) Then
 		Set ObjFileHandle = objFso.OpenTextFile(strFileName,8)
@@ -292,8 +296,8 @@ Sub WriteToFile (StrText, StrFileName)
 	'Close debug text file
 	objFileHandle.Close()
 	'DAQ add exe file
-	p.StartInfo.FileName = "C:\\Sonion\\main.exe"
-	p.Start()
+	'p.StartInfo.FileName = "C:\\Sonion\\main.exe"
+	'p.Start()
 End Sub 
 
 

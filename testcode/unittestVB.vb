@@ -1,4 +1,3 @@
-
 Const MainPosition_X    = 15.95
 Const MainPosition_Y    = 9.73
 
@@ -36,14 +35,14 @@ Set objFso = CreateObject("Scripting.FileSystemObject")
 
 Sub LaserMarker_ScriptBegin ()
 
-  Dim mo_Data
-  Dim mo_MainCircleRadius
-  Dim sp
-  Dim wrad
-  Dim Angle
-  Dim dActPos
-  Dim Myaxis
-	
+    Dim mo_Data
+    Dim mo_MainCircleRadius
+    Dim sp
+    Dim wrad
+    Dim Angle
+    Dim dActPos
+    Dim Myaxis
+
   
 
     Dim text1
@@ -84,6 +83,7 @@ Function Read_final_serial_from_txt()
     Set objFile  = objFso.OpenTextFile("temp.txt",1)
     Do Until objFile.AtEndOfStream 
         lastLine = objFile.ReadLine
+        msgbox "READ FINAL SERIAL FOR INT"
     Loop
     objFile.Close
 End Function
