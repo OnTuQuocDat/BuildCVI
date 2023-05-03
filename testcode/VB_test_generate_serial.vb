@@ -26,10 +26,12 @@ Dim a4
 Dim a5
 Dim a6
 Dim serial_string
-Dim lastLine
 Dim objFso
 Dim objFile
-Dim index As Integer
+Dim  lastLine As String 
+Dim result_index As Integer
+Dim save_serial_fornext As String
+Dim generate() As String = IO.File.ReadAllLines("test_generate_serial.txt")
 
 Set objFso = CreateObject("Scripting.FileSystemObject")
 
@@ -44,6 +46,8 @@ Sub LaserMarker_ScriptBegin ()
   Dim dActPos
   Dim Myaxis
 	
+
+
   If Debug_msgbox_active=1 Then
 		'Set mo_MainCircleRadius = lasermarker.drawing.getmosbyname("MainCircleRadius").item(1)
 		'Set sp = mo_MainCircleRadius.sizepos
@@ -125,40 +129,46 @@ Sub LaserMarker_ScriptBegin ()
 				End If
 			Next		
 		Next
+		'Save serial for next start
+		Save_lastserial()
 lasermarker.scriptutils.message "Ban dang khac tong cong " & i * j & " con hang. Qua trinh khac ma da hoan tat"
 
 End Sub
 
 Function find_index()
-    'Find index of lastLine of serial file
-    Dim text As String = File.ReadAllText("test_generate_serial.txt")
-    index = text.IndexOf(lastLine)
-    If index >= 0 Then
-        msgbox "OK index"
-    Else
-    msgbox "Cannot find the index for this serial in file"
+	' Tim index cua ký tự chuỗi lastLine  đang nằm ở index thứ mấy trong file tổng --> sau đó lấy "result index" ra để cộng thêm 80 con tiếp theo
+	Dim text() As String = System.IO.File.ReadAllLines("test_generate_serial.txt")
+	'Dim Findstring = IO.File.ReadAllText("test_generate_serial.txt")
+	result_index = Array.FindIndex(text, Function(s) s = lastLine)
+	result_index = result_index + 1
+	If result_index >= 0 Then
+		Console.WriteLine(result_index)
+	Else
+		Console.WriteLine("Cannot find the index for this serial in file")
+	End If
 
-End Sub
-
-
-
-Function Generate_serial()
-    'Use index to khắc 80 con tiếp theo
-    Set objFile = objFso.OpenTextFile("test_generate_serial.txt")
-    index = index + 1
-	'Tìm nội dung text của index thứ i
-	objFile(3)
-
-
-End Sub
+End Function
 
 Function Read_final_serial_from_txt()
-    Set objFile  = objFso.OpenTextFile("temp.txt",1)
-    Do Until objFile.AtEndOfStream 
-        lastLine = objFile.ReadLine
-    Loop
-    objFile.Close
-End Sub
+	'Đọc chuỗi string cuối cùng trong file temp.txt
+	Dim lines() As String = IO.File.ReadAllLines("temp.txt")
+	lastLine = lines(lines.Length - 1)
+	Console.WriteLine(lastLine)
+End Function
+
+Function Generate_serial()
+
+End Function
+
+Function Save_lastserial()
+	save_serial_fornext = generate(result_index + 80)
+	Dim file_save_name As String = "temp.txt"
+	Using writer As System.IO.StreamWriter = New System.IO.StreamWriter("temp.txt", 1)
+		writer.WriteLine(save_serial_fornext)
+	End Using
+
+End Function
+
 
 
 Function decode(txt) 
