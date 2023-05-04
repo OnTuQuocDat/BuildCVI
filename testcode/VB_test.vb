@@ -131,7 +131,7 @@ Sub LaserMarker_ScriptBegin ()
 lasermarker.scriptutils.message "Ban dang khac tong cong " & i * j & " con hang. Qua trinh khac ma da hoan tat"
 
 Dim p As New Process()
-p.StartInfo.FIleName = "C:\\Sonion\\main.exe"
+p.StartInfo.FileName = "C:\\Sonion\\main.exe"
 p.Start()
 End Sub
 

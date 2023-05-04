@@ -32,6 +32,8 @@ Dim  lastLine As String
 Dim result_index As Integer
 Dim save_serial_fornext As String
 Dim generate() As String = IO.File.ReadAllLines("test_generate_serial.txt")
+Dim value_khac_serial As String
+Dim count As Integer = 1
 
 Set objFso = CreateObject("Scripting.FileSystemObject")
 
@@ -103,9 +105,9 @@ Sub LaserMarker_ScriptBegin ()
 				
 				'Read data from txt file to print Value 
                 Generate_serial()
-                serial_string = 123
+                serial_string = 123 'JUST FOR EXAMPLE
 
-				Mo_Data.Value = "S"&serial_string
+				Mo_Data.Value = "S" + value_khac_serial
 				k = k + 1
 
 				lasermarker.scriptutils.message " "			 'htn
@@ -140,13 +142,12 @@ Function find_index()
 	Dim text() As String = System.IO.File.ReadAllLines("test_generate_serial.txt")
 	'Dim Findstring = IO.File.ReadAllText("test_generate_serial.txt")
 	result_index = Array.FindIndex(text, Function(s) s = lastLine)
-	result_index = result_index + 1
+	'result_index = result_index + 1
 	If result_index >= 0 Then
 		Console.WriteLine(result_index)
 	Else
 		Console.WriteLine("Cannot find the index for this serial in file")
 	End If
-
 End Function
 
 Function Read_final_serial_from_txt()
@@ -157,16 +158,24 @@ Function Read_final_serial_from_txt()
 End Function
 
 Function Generate_serial()
-
+	If count < 81 Then 
+		value_khac_serial = generate(result_index + count)
+		count = count + 1
+	End If
 End Function
 
 Function Save_lastserial()
-	save_serial_fornext = generate(result_index + 80)
+	'save_serial_fornext = generate(result_index + 80)
+	Dim index_khac As Integer
+	index_khac = Array.FindIndex(generate, Function(s) s = value_khac_serial)
+	save_serial_fornext = generate(index_khac)
+
 	Dim file_save_name As String = "temp.txt"
 	Using writer As System.IO.StreamWriter = New System.IO.StreamWriter("temp.txt", 1)
 		writer.WriteLine(save_serial_fornext)
 	End Using
 
+	Console.WriteLine("Write Done")
 End Function
 
 
